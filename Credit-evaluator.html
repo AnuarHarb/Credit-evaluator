@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="Credit-evaluator">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `Credit-evaluator`
+     * Polymer component that creates a generic, customizable and dynamic credit evaluator.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class CreditEvaluator extends Polymer.Element {
+      static get is() { return 'Credit-evaluator'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'Credit-evaluator'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(CreditEvaluator.is, CreditEvaluator);
+  </script>
+</dom-module>
