@@ -3,7 +3,10 @@
   "description": "Polymer component that creates a generic, customizable and dynamic credit evaluator.",
   "main": "Credit-evaluator.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-header-panel": "PolymerElements/paper-header-panel#^2.0.0",
+    "paper-button": "PolymerElements/paper-button#^2.0.0",
+    "paper-dynamic-forms": "alfonsorios96/paper-dynamic-forms#^0.2.6"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
