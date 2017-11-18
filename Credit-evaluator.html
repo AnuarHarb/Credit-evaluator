@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-header-panel/paper-header-panel.html">
 <link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-dynamic-forms/paper-dynamic-forms.html">
 
 <dom-module id="credit-evaluator">
   <template>
@@ -61,12 +62,7 @@
       </div>
       <div class="main-container">
         <slot name="form"></slot>
-        <h2>a</h2>
-        <h2>b</h2>
-        <h2>c</h2>
-        <h2>d</h2>
-        <h2>d</h2>
-        <h2>e</h2>
+        <paper-dynamic-forms config="[[form]]"></paper-dynamic-forms>
       </div>
       <div class="footer-container">
         <slot name="footer">Click me!</slot>
@@ -86,6 +82,34 @@
       static get is() { return 'credit-evaluator'; }
       static get properties() {
         return {
+          form: {
+            type: Array,
+            value: [
+                {
+                  label: 'Cantidad',
+                  type: 'text-input',
+                  options: ['option a', 'option b', 'option c']
+                },
+                {
+                  label: 'Plazo',
+                  type: 'option-input',
+                  options: ['6 meses', '12 meses', '18 meses', '24 meses']
+                },
+                {
+                  label: 'Name',
+                  type: 'text-input',
+                  options: ['option a', 'option b', 'option c']
+                },
+                {
+                    label: 'Primer Apellido',
+                    type: 'text-input'
+                },
+                {
+                    label: 'Segundo Apellido',
+                    type: 'text-input'
+                }
+            ]
+          },
           titleHeader: {
             type: String,
             value: 'CREDIT EVALUATOR'
