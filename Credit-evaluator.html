@@ -1,7 +1,9 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
 <link rel="import" href="../credit-connection/credit-connection.html">
 <link rel="import" href="../form-evaluator-generator/form-evaluator-generator.html">
+
 
 <dom-module id="credit-evaluator">
     <template>
@@ -76,6 +78,44 @@
                 font-size: var(--credit-evaluator-footer-font-size, 1rem);
                 @apply --credit-evaluator-footer-mixin;
             }
+
+            .dialog-message {
+                min-height: 200px;
+                min-width: 80%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-items: center;
+                margin: 0px;
+                padding: 20px;
+            }
+
+            .dialog-message h2 {
+                margin: 0px;
+                margin-bottom: 30px;
+                padding: 0px;
+            }
+
+            .dialog-message p {
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .error {
+                background-color: indianred;
+                color: white;
+                @apply
+            }
+
+            .success {
+                background-color: mediumseagreen;
+                color: white;
+            }
+
+            .sorry {
+                background-color: #3c3c3c;
+                color: white;
+            }
         </style>
 
         <div class="header-container">
@@ -92,8 +132,16 @@
         <div class="footer-container">
             <slot name="footer">[[titleFooter]]</slot>
         </div>
+        <paper-dialog id="animated" exit-animation="fade-out-animation"
+                      with-backdrop>
+            <div id="dialogMessage" class="dialog-message">
+                <h2>[[titleMessage]]</h2>
+                <p>[[message]]</p>
+            </div>
+        </paper-dialog>
 
-        <credit-connection id="creditConnection" method="POST" params="[[body]]" body="[[body]]" request="[[reuqest]]" api="[[url]]"
+        <credit-connection id="creditConnection" method="POST" params="[[body]]" body="[[body]]" request="[[reuqest]]"
+                           api="[[url]]"
                            config="[[config]]" on-credit-approved="_handleAproved" on-credit-denegate="_handleDenegade"
                            on-error-request="_handleError"></credit-connection>
     </template>
@@ -184,6 +232,20 @@
                                     name: 'timeToPay'
                                 }
                             ]
+                        },
+                        response: {
+                            type: Object,
+                            value: ''
+                        },
+                        titleMessage: {
+                            type: String,
+                            value: '',
+                            computed: '_generateTitleMessage(response)'
+                        },
+                        message: {
+                            type: String,
+                            value: '',
+                            computed: '_generateMessage(response)'
                         }
                     };
                 }
@@ -193,7 +255,6 @@
                 }
 
                 _generateBody(values) {
-                    console.log(values);
                     let bodyObject = {};
                     values.forEach(function normalizeObject(item) {
                         Object.defineProperty(bodyObject, item.name, {
@@ -205,8 +266,6 @@
                     });
                     this.set('body', bodyObject);
                     this.set('request', JSON.stringify(bodyObject));
-                    console.log(bodyObject);
-                    console.log(this.request);
                 }
 
                 _handleFormSubmit(event) {
@@ -214,16 +273,43 @@
                     this._generateReques();
                 }
 
-                _handleAproved() {
-                    console.log("aproved");
+                _handleAproved(event) {
+                    console.log(event.detail);
+                    this.set('response', event.detail);
+                    this.$.animated.className='success';
+                    this.$.animated.open();
                 }
 
-                _handleDenegade() {
-                    console.log("denegade");
+                _handleDenegade(event) {
+                    console.log(event.detail);
+                    this.set('response', event.detail);
+                    this.$.animated.className='sorry';
+                    this.$.animated.open();
                 }
 
-                _handleError() {
-                    console.log("error");
+                _handleError(event) {
+                    console.log(event.detail);
+                    this.set('response', {success: false, message: 'Por el momento no podemos procesar su prestamo'});
+                    this.$.animated.className='error';
+                    this.$.animated.open();
+                    console.log(event.detail);
+                }
+
+                _generateTitleMessage(response) {
+                    console.log(response.success);
+                    if (response.success) {
+                        return `Felicidades`;
+                    } else {
+                        return `Lo sentimos`;
+                    }
+                }
+
+                _generateMessage(response) {
+                    if (response.success) {
+                        return `${this.body.name} tu prestamos te está esperando, solo tienes que pagar $${response.response.monthlyPayWithInterest} al mes`;
+                    } else {
+                        return `Por el momento no podemos otorgar un crédito con esas caracteristicas al Sr(a) ${this.body.name}`;
+                    }
                 }
 
             }

@@ -1,4 +1,4 @@
-# \<Credit-evaluator\>
+# \<credit-evaluator\>
 
 Polymer component that creates a generic, customizable and dynamic credit evaluator.
 
@@ -60,3 +60,38 @@ Your application is already set up to be tested via [web-component-tester](https
 |--credit-evaluator-footer-color| footer color |white|
 |--credit-evaluator-footer-font-size| footer font-size |1rem|
 |--credit-evaluator-footer-mixin| footer mixin | {}|
+
+
+## Properties
+
+### Custom properties
+
+|Custom property  | Description   |
+|---------------- |:-------------:|
+|titleHeader    | titulo que se pinta sobre el header del formulario|
+|titleFooter    | titulo o leyenda que se pinta sobre el footer|
+|url    | url de la api que se va consumir a traves del componente|
+|body   | body de la peticion que se va a realizar con base en los formulario|
+|config   | propiedad usada cuando no se tiene un api realiza el calculo basico de un prestamo personal|
+|params   | parametros de la peticion|
+|request    | json que se envia en la solicitud de la api|
+|form   | arreglo con los objetos que forman el formulario|
+|response   | respuesta que arroja la api|
+|titleMessage   | titulo que se genera con la respuesta del servicio|
+|message    | mensaje que se genera con la respuesta del servicio|
+
+
+## Methods
+
+### Custom events
+
+|Custom property  | Description   | Parametros |
+|---------------- |:-------------:|:----------:|
+|_generateReques  | metodo que genera la peticion a la API si es que se encuentra seteada la propiedad url| ninguno |
+|_generateBody  | metodo que convierte los valores del formulario a un objeto| Array |
+|_handleFormSubmit  | metodo que se invoca cuando se escucha el evento de submit en el formulario| event|
+|_handleAproved | metodo invocado cuando la respuesta de la API es afirmativa(autoriza el crédito)| event|
+|_handleDenegade  | metodo invocado cuando la respuesta de la API es negativa(no se autoriza el crédito)| event|
+|_handleError | metodo invocado cuando la petición falla| response|
+|_generateTitleMessage  | metodo que genera automaticamente el titulo del mensaje| response|
+|_generateMessage | metodo que genera el cuerpo del mensaje mostrado al solicitar un crédito| reponse|
