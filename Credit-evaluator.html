@@ -17,21 +17,21 @@
       .header-container {
         display: var(--credit-evaluator-header-display, flex);
         flex-direction: var(--credit-evaluator-header-flex-direction, row);
+        align-items: var(--credit-evaluator-header-align-items, center);
         justify-content: var(--credit-evaluator-header-justify-content, center);
         height: var(--credit-evaluator-header-height, 10%);
         width: var(--credit-evaluator-header-width, 100%);
         border: var(--credit-evaluator-header-border, 1px solid white);
         background-color: var(--credit-evaluator-header-bg-color, black);
-        color: var(--credit-evaluator-header-color, white);
+        color: var(--credit-evaluator-header-color, lightgray);
         font-size: var(--credit-evaluator-header-font-size, 2rem);
-
         @apply --credit-evaluator-header-mixin;
       }
       .main-container {
         display: var(--credit-evaluator-main-display, flex);
         flex-direction: var(--credit-evaluator-main-flex-direction, column);
         justify-content: var(--credit-evaluator-main-justify-content, center);
-        overflow-y: scroll!important;
+        overflow-y: scroll;
         height: var(--credit-evaluator-main-height, 80%);
         width: var(--credit-evaluator-main-width, 100%);
         border: var(--credit-evaluator-main-border, 1px solid white);
@@ -42,13 +42,14 @@
       .footer-container {
         display: var(--credit-evaluator-footer-display, flex);
         flex-direction: var(--credit-evaluator-footer-flex-direction, row);
+        align-items: var(--credit-evaluator-footer-align-items, center);
         justify-content: var(--credit-evaluator-footer-justify-content, center);
         height: var(--credit-evaluator-footer-height, 10%);
         width: var(--credit-evaluator-footer-width, 100%);
         border: var(--credit-evaluator-header-border, 1px solid white);
         background-color: var(--credit-evaluator-footer-bg-color, lightgray);
         color: var(--credit-evaluator-footer-color, white);
-        font-size: var(--credit-evaluator-footer-font-size, 2rem);
+        font-size: var(--credit-evaluator-footer-font-size, 1rem);
         @apply --credit-evaluator-footer-mixin;
       }
     </style>
@@ -57,6 +58,7 @@
         <paper-header-panel>
           <paper-toolbar>
             <span slot="top" class="title">[[titleHeader]]</span>
+            <iron-icon icon="[[iconHeader]]"></iron-icon>
           </paper-toolbar>
         </paper-header-panel>
       </div>
@@ -65,7 +67,7 @@
         <paper-dynamic-forms config="[[form]]"></paper-dynamic-forms>
       </div>
       <div class="footer-container">
-        <slot name="footer">Click me!</slot>
+        <slot name="footer">[[titleFooter]]</slot>
       </div>
   </template>
 
@@ -87,8 +89,7 @@
             value: [
                 {
                   label: 'Cantidad',
-                  type: 'text-input',
-                  options: ['option a', 'option b', 'option c']
+                  type: 'text-input'
                 },
                 {
                   label: 'Plazo',
@@ -112,13 +113,25 @@
           },
           titleHeader: {
             type: String,
-            value: 'CREDIT EVALUATOR'
+            value: 'Evaluator'
+          },
+          titleFooter: {
+              type: String,
+              value: '@Copyright 2017'
           },
           config: {
             type: Object,
             value: {
                 type: 'Hipoteca'
             }
+          },
+          url: {
+            type: String,
+            value: ''
+          },
+          body: {
+            type: Object,
+            value: {}
           }
         };
       }
