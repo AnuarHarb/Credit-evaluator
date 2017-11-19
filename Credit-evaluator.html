@@ -93,7 +93,7 @@
             <slot name="footer">[[titleFooter]]</slot>
         </div>
 
-        <credit-connection id="creditConnection" method="POST" params="[[params]]" body="[[body]]" api="[[url]]"
+        <credit-connection id="creditConnection" method="POST" params="[[body]]" body="[[body]]" request="[[reuqest]]" api="[[url]]"
                            config="[[config]]" on-credit-approved="_handleAproved" on-credit-denegate="_handleDenegade"
                            on-error-request="_handleError"></credit-connection>
     </template>
@@ -140,6 +140,10 @@
                         params: {
                             type: Object,
                             value: {}
+                        },
+                        request: {
+                            type: String,
+                            value: ''
                         },
                         form: {
                             type: Array,
@@ -200,7 +204,9 @@
                         });
                     });
                     this.set('body', bodyObject);
+                    this.set('request', JSON.stringify(bodyObject));
                     console.log(bodyObject);
+                    console.log(this.request);
                 }
 
                 _handleFormSubmit(event) {
