@@ -10,9 +10,12 @@
                 display: flex;
                 flex-direction: column;
                 background-color: darkgray;
+                border: none;
                 height: var(--credit-evaluator-height, 400px);
                 width: var(--credit-evaluator-width, 100%);
                 margin-top: 30px;
+                border-radius: var(--credit-evaluator-border-radius, 10px);
+                font-family:  var(--credit-evaluator-font-family, arial);
                 @apply --credit-evaluator-mixin;
                 --form-evaluator-button-theme: {
                     display: flex;
@@ -38,10 +41,13 @@
                 justify-content: var(--credit-evaluator-header-justify-content, center);
                 height: var(--credit-evaluator-header-height, 10%);
                 width: var(--credit-evaluator-header-width, 100%);
-                border: var(--credit-evaluator-header-border, 1px solid white);
+                border: var(--credit-evaluator-header-border, none);
+                border-top-left-radius: var(--credit-evaluator-border-radius, 10px);
+                border-top-right-radius: var(--credit-evaluator-border-radius, 10px);
                 background-color: var(--credit-evaluator-header-bg-color, black);
                 color: var(--credit-evaluator-header-color, lightgray);
                 font-size: var(--credit-evaluator-header-font-size, 2rem);
+                padding: 20px;
                 @apply --credit-evaluator-header-mixin;
             }
 
@@ -50,8 +56,8 @@
                 flex-direction: var(--credit-evaluator-main-flex-direction, column);
                 justify-content: var(--credit-evaluator-main-justify-content, center);
                 overflow-y: scroll;
-                padding-top: 50px;
-                height: var(--credit-evaluator-main-height, 80%);
+                padding: 20px;
+                height: var(--credit-evaluator-main-height, 100%);
                 width: var(--credit-evaluator-main-width, 100%);
                 border: var(--credit-evaluator-main-border, 1px solid white);
                 background-color: var(--credit-evaluator-main-bg-color, white);
@@ -66,14 +72,17 @@
                 justify-content: var(--credit-evaluator-footer-justify-content, center);
                 height: var(--credit-evaluator-footer-height, 10%);
                 width: var(--credit-evaluator-footer-width, 100%);
-                border: var(--credit-evaluator-header-border, 1px solid white);
+                border: var(--credit-evaluator-header-border, none);
+                border-bottom-left-radius: var(--credit-evaluator-border-radius, 10px);
+                border-bottom-right-radius: var(--credit-evaluator-border-radius, 10px);
                 background-color: var(--credit-evaluator-footer-bg-color, lightgray);
                 color: var(--credit-evaluator-footer-color, white);
                 font-size: var(--credit-evaluator-footer-font-size, 1rem);
+                padding: 0px 20px;
                 @apply --credit-evaluator-footer-mixin;
             }
         </style>
-
+        
         <div class="header-container">
             <paper-header-panel seamed>
                 <paper-toolbar>
