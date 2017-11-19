@@ -1,8 +1,8 @@
 {
-  "name": "Credit-evaluator",
+  "name": "credit-evaluator",
   "description": "Polymer component that creates a generic, customizable and dynamic credit evaluator.",
   "main": "Credit-evaluator.html",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-header-panel": "PolymerElements/paper-header-panel#^2.0.0",
