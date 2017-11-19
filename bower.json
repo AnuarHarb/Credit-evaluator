@@ -2,11 +2,11 @@
   "name": "credit-evaluator",
   "description": "Polymer component that creates a generic, customizable and dynamic credit evaluator.",
   "main": "Credit-evaluator.html",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "paper-header-panel": "PolymerElements/paper-header-panel#^2.0.0",
-    "credit-connection": "AnuarHarb/credit-connection#0.0.5",
+    "credit-connection": "AnuarHarb/credit-connection#^0.0.5",
     "form-evaluator-generator": "dezkareid/form-evaluator-generator"
   },
   "devDependencies": {
