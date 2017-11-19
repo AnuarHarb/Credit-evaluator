@@ -1,143 +1,189 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../paper-header-panel/paper-header-panel.html">
-<link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../paper-dynamic-forms/paper-dynamic-forms.html">
+<link rel="import" href="../credit-connection/credit-connection.html">
+<link rel="import" href="../form-evaluator-generator/form-evaluator-generator.html">
 
 <dom-module id="credit-evaluator">
-  <template>
-    <style>
-      :host {
-        display: flex;
-        flex-direction: column;
-        background-color: darkgray;
-        height: var(--credit-evaluator-height, 400px);
-        width: var(--credit-evaluator-width, 100%);
-        @apply --credit-evaluator-mixin;
-      }
-      .header-container {
-        display: var(--credit-evaluator-header-display, flex);
-        flex-direction: var(--credit-evaluator-header-flex-direction, row);
-        align-items: var(--credit-evaluator-header-align-items, center);
-        justify-content: var(--credit-evaluator-header-justify-content, center);
-        height: var(--credit-evaluator-header-height, 10%);
-        width: var(--credit-evaluator-header-width, 100%);
-        border: var(--credit-evaluator-header-border, 1px solid white);
-        background-color: var(--credit-evaluator-header-bg-color, black);
-        color: var(--credit-evaluator-header-color, lightgray);
-        font-size: var(--credit-evaluator-header-font-size, 2rem);
-        @apply --credit-evaluator-header-mixin;
-      }
-      .main-container {
-        display: var(--credit-evaluator-main-display, flex);
-        flex-direction: var(--credit-evaluator-main-flex-direction, column);
-        justify-content: var(--credit-evaluator-main-justify-content, center);
-        overflow-y: scroll;
-        height: var(--credit-evaluator-main-height, 80%);
-        width: var(--credit-evaluator-main-width, 100%);
-        border: var(--credit-evaluator-main-border, 1px solid white);
-        background-color: var(--credit-evaluator-main-bg-color, white);
-        color: var(--credit-evaluator-main-color, black);
-        @apply --credit-evaluator-main-mixin;
-      }
-      .footer-container {
-        display: var(--credit-evaluator-footer-display, flex);
-        flex-direction: var(--credit-evaluator-footer-flex-direction, row);
-        align-items: var(--credit-evaluator-footer-align-items, center);
-        justify-content: var(--credit-evaluator-footer-justify-content, center);
-        height: var(--credit-evaluator-footer-height, 10%);
-        width: var(--credit-evaluator-footer-width, 100%);
-        border: var(--credit-evaluator-header-border, 1px solid white);
-        background-color: var(--credit-evaluator-footer-bg-color, lightgray);
-        color: var(--credit-evaluator-footer-color, white);
-        font-size: var(--credit-evaluator-footer-font-size, 1rem);
-        @apply --credit-evaluator-footer-mixin;
-      }
-    </style>
-
-      <div class="header-container">
-        <paper-header-panel>
-          <paper-toolbar>
-            <span slot="top" class="title">[[titleHeader]]</span>
-            <iron-icon icon="[[iconHeader]]"></iron-icon>
-          </paper-toolbar>
-        </paper-header-panel>
-      </div>
-      <div class="main-container">
-        <slot name="form"></slot>
-        <paper-dynamic-forms config="[[form]]"></paper-dynamic-forms>
-      </div>
-      <div class="footer-container">
-        <slot name="footer">[[titleFooter]]</slot>
-      </div>
-  </template>
-
-  <script>
-    /**
-     * `Credit-evaluator`
-     * Polymer component that creates a generic, customizable and dynamic credit evaluator.
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
-     */
-    (function(customElements){
-        class CreditEvaluator extends Polymer.Element {
-            static get is() { return 'credit-evaluator'; }
-            static get properties() {
-                return {
-                    form: {
-                        type: Array,
-                        value: [
-                            {
-                                label: 'Cantidad',
-                                type: 'text-input'
-                            },
-                            {
-                                label: 'Plazo',
-                                type: 'option-input',
-                                options: ['6 meses', '12 meses', '18 meses', '24 meses']
-                            },
-                            {
-                                label: 'Name',
-                                type: 'text-input',
-                                options: ['option a', 'option b', 'option c']
-                            },
-                            {
-                                label: 'Primer Apellido',
-                                type: 'text-input'
-                            },
-                            {
-                                label: 'Segundo Apellido',
-                                type: 'text-input'
-                            }
-                        ]
-                    },
-                    titleHeader: {
-                        type: String,
-                        value: 'Evaluator'
-                    },
-                    titleFooter: {
-                        type: String,
-                        value: '@Copyright 2017'
-                    },
-                    config: {
-                        type: Object,
-                        value: {
-                            type: 'Hipoteca'
-                        }
-                    },
-                    url: {
-                        type: String,
-                        value: ''
-                    },
-                    body: {
-                        type: Object,
-                        value: {}
-                    }
-                };
+    <template>
+        <style>
+            :host {
+                display: flex;
+                flex-direction: column;
+                background-color: darkgray;
+                height: var(--credit-evaluator-height, 400px);
+                width: var(--credit-evaluator-width, 100%);
+                @apply --credit-evaluator-mixin;
             }
-        }
-        customElements.define(CreditEvaluator.is, CreditEvaluator);
-    })(window.customElements);
-  </script>
+
+            .header-container {
+                display: var(--credit-evaluator-header-display, flex);
+                flex-direction: var(--credit-evaluator-header-flex-direction, row);
+                align-items: var(--credit-evaluator-header-align-items, center);
+                justify-content: var(--credit-evaluator-header-justify-content, center);
+                height: var(--credit-evaluator-header-height, 10%);
+                width: var(--credit-evaluator-header-width, 100%);
+                border: var(--credit-evaluator-header-border, 1px solid white);
+                background-color: var(--credit-evaluator-header-bg-color, black);
+                color: var(--credit-evaluator-header-color, lightgray);
+                font-size: var(--credit-evaluator-header-font-size, 2rem);
+                @apply --credit-evaluator-header-mixin;
+            }
+
+            .main-container {
+                display: var(--credit-evaluator-main-display, flex);
+                flex-direction: var(--credit-evaluator-main-flex-direction, column);
+                justify-content: var(--credit-evaluator-main-justify-content, center);
+                overflow-y: scroll;
+                height: var(--credit-evaluator-main-height, 80%);
+                width: var(--credit-evaluator-main-width, 100%);
+                border: var(--credit-evaluator-main-border, 1px solid white);
+                background-color: var(--credit-evaluator-main-bg-color, white);
+                color: var(--credit-evaluator-main-color, black);
+                @apply --credit-evaluator-main-mixin;
+            }
+
+            .footer-container {
+                display: var(--credit-evaluator-footer-display, flex);
+                flex-direction: var(--credit-evaluator-footer-flex-direction, row);
+                align-items: var(--credit-evaluator-footer-align-items, center);
+                justify-content: var(--credit-evaluator-footer-justify-content, center);
+                height: var(--credit-evaluator-footer-height, 10%);
+                width: var(--credit-evaluator-footer-width, 100%);
+                border: var(--credit-evaluator-header-border, 1px solid white);
+                background-color: var(--credit-evaluator-footer-bg-color, lightgray);
+                color: var(--credit-evaluator-footer-color, white);
+                font-size: var(--credit-evaluator-footer-font-size, 1rem);
+                @apply --credit-evaluator-footer-mixin;
+            }
+        </style>
+
+        <div class="header-container">
+            <paper-header-panel seamed>
+                <paper-toolbar>
+                    <span slot="top" class="title">[[titleHeader]]</span>
+                    <iron-icon icon="[[iconHeader]]"></iron-icon>
+                </paper-toolbar>
+            </paper-header-panel>
+        </div>
+        <div class="main-container" on-form-evaluator-submitted="_handleFormSubmit">
+            <form-evaluator-generator fields="[[form]]">
+            </form-evaluator-generator>
+        </div>
+        <div class="footer-container">
+            <slot name="footer">[[titleFooter]]</slot>
+        </div>
+
+        <credit-connection id="creditConnection" params="[[params]]" body="[[body]]" config="[[config]]"></credit-connection>
+    </template>
+
+    <script>
+        /**
+         * `Credit-evaluator`
+         * Polymer component that creates a generic, customizable and dynamic credit evaluator.
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        (function (customElements) {
+            'use strict';
+
+            class CreditEvaluator extends Polymer.Element {
+                static get is() {
+                    return 'credit-evaluator';
+                }
+
+                static get properties() {
+                    return {
+                        titleHeader: {
+                            type: String,
+                            value: 'Evaluator'
+                        },
+                        titleFooter: {
+                            type: String,
+                            value: '@Copyright 2017'
+                        },
+                        url: {
+                            type: String,
+                            value: 'https://chewiekies.firebaseio.com/data.json'
+                        },
+                        body: {
+                            type: Object,
+                            value: {}
+                        },
+                        config: {
+                            type: Object,
+                            value: {}
+                        },
+                        params: {
+                            type: Object,
+                            value: {}
+                        },
+                        form: {
+                            type: Array,
+                            value: [
+                                {
+                                    label: 'Nombre',
+                                    error: 'Este campo solo acepta letras',
+                                    pattern: '[a-zA-Z]*',
+                                    type: 'text'
+                                },
+                                {
+                                    label: 'Appellido',
+                                    error: 'Este campo solo acepta letras',
+                                    pattern: '[a-zA-Z]*',
+                                    type: 'text'
+                                },
+                                {
+                                    label: 'Amount',
+                                    error: 'Este campo solo acepta numeros',
+                                    pattern: '[0-9]*',
+                                    type: 'number'
+                                },
+                                {
+                                    label: 'Monthly',
+                                    error: 'Este campo solo acepta numeros',
+                                    pattern: '[0-9]*',
+                                    type: 'text'
+                                },
+                                {
+                                    label: 'Tiempo',
+                                    error: 'Este campo solo acepta numeros',
+                                    pattern: '[0-9]*',
+                                    type: 'number'
+                                }
+                            ]
+                        }
+                    };
+                }
+
+                _generateReques() {
+                    this.$.creditConnection.generateRequest();
+                }
+
+                _generateBody(values) {
+                    console.log(values);
+                    let bodyObject = {};
+                    values.forEach(function normalizeObject(item) {
+                        Object.defineProperty(bodyObject, item.name, {
+                            value: item.value,
+                            writable: true,
+                            enumerable: true,
+                            configurable: true
+                        });
+                    });
+                    this.set('body', bodyObject);
+                    console.log(bodyObject);
+                }
+
+                _handleFormSubmit(event) {
+                    this._generateBody(event.detail);
+                    this._generateReques();
+                }
+
+            }
+
+            customElements.define(CreditEvaluator.is, CreditEvaluator);
+        })(window.customElements);
+    </script>
 </dom-module>
