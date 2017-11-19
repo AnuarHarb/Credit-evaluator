@@ -80,63 +80,64 @@
      * @polymer
      * @demo demo/index.html
      */
-    class CreditEvaluator extends Polymer.Element {
-      static get is() { return 'credit-evaluator'; }
-      static get properties() {
-        return {
-          form: {
-            type: Array,
-            value: [
-                {
-                  label: 'Cantidad',
-                  type: 'text-input'
-                },
-                {
-                  label: 'Plazo',
-                  type: 'option-input',
-                  options: ['6 meses', '12 meses', '18 meses', '24 meses']
-                },
-                {
-                  label: 'Name',
-                  type: 'text-input',
-                  options: ['option a', 'option b', 'option c']
-                },
-                {
-                    label: 'Primer Apellido',
-                    type: 'text-input'
-                },
-                {
-                    label: 'Segundo Apellido',
-                    type: 'text-input'
-                }
-            ]
-          },
-          titleHeader: {
-            type: String,
-            value: 'Evaluator'
-          },
-          titleFooter: {
-              type: String,
-              value: '@Copyright 2017'
-          },
-          config: {
-            type: Object,
-            value: {
-                type: 'Hipoteca'
+    (function(customElements){
+        class CreditEvaluator extends Polymer.Element {
+            static get is() { return 'credit-evaluator'; }
+            static get properties() {
+                return {
+                    form: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'Cantidad',
+                                type: 'text-input'
+                            },
+                            {
+                                label: 'Plazo',
+                                type: 'option-input',
+                                options: ['6 meses', '12 meses', '18 meses', '24 meses']
+                            },
+                            {
+                                label: 'Name',
+                                type: 'text-input',
+                                options: ['option a', 'option b', 'option c']
+                            },
+                            {
+                                label: 'Primer Apellido',
+                                type: 'text-input'
+                            },
+                            {
+                                label: 'Segundo Apellido',
+                                type: 'text-input'
+                            }
+                        ]
+                    },
+                    titleHeader: {
+                        type: String,
+                        value: 'Evaluator'
+                    },
+                    titleFooter: {
+                        type: String,
+                        value: '@Copyright 2017'
+                    },
+                    config: {
+                        type: Object,
+                        value: {
+                            type: 'Hipoteca'
+                        }
+                    },
+                    url: {
+                        type: String,
+                        value: ''
+                    },
+                    body: {
+                        type: Object,
+                        value: {}
+                    }
+                };
             }
-          },
-          url: {
-            type: String,
-            value: ''
-          },
-          body: {
-            type: Object,
-            value: {}
-          }
-        };
-      }
-    }
-
-    window.customElements.define(CreditEvaluator.is, CreditEvaluator);
+        }
+        customElements.define(CreditEvaluator.is, CreditEvaluator);
+    })(window.customElements);
   </script>
 </dom-module>
