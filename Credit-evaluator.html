@@ -89,7 +89,7 @@
             <slot name="footer">[[titleFooter]]</slot>
         </div>
 
-        <credit-connection id="creditConnection" method="POST" api="[[url]]" params="[[params]]" body="[[body]]" config="[[config]]"></credit-connection>
+        <credit-connection id="creditConnection" method="POST"  params="[[params]]" body="[[body]]" config="[[config]]" on-credit-approved="_handleAproved" on-credit-denegate="_handleDenegade" on-error-request="_handleError"></credit-connection>
     </template>
 
     <script>
@@ -200,6 +200,18 @@
                 _handleFormSubmit(event) {
                     this._generateBody(event.detail);
                     this._generateReques();
+                }
+
+                _handleAproved() {
+                    console.log("aproved");
+                }
+
+                _handleDenegade() {
+                    console.log("denegade");
+                }
+
+                _handleError() {
+                    console.log("error");
                 }
 
             }
